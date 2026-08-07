@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HACKED-WIRE News • Article 2</title>
+
+  <style>
+    :root{
+      --bg0:#060711;
+      --bg1:#090a16;
+      --text:#e9ecff;
+      --muted:#a7add6;
+      --line: rgba(140, 160, 255, .18);
+      --cyan:#2df7ff;
+      --violet:#a86bff;
+      --pink:#ff3bd4;
+      --radius: 16px;
+      --radius2: 22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --cardGradA: radial-gradient(300px 120px at 15% 0%, rgba(45,247,255,.10), transparent 55%);
+      --cardGradB: radial-gradient(260px 120px at 95% 0%, rgba(168,107,255,.12), transparent 55%);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 12% 12%, rgba(168,107,255,.20), transparent 55%),
+        radial-gradient(800px 450px at 82% 18%, rgba(45,247,255,.18), transparent 55%),
+        radial-gradient(700px 420px at 60% 92%, rgba(255,59,212,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(to right, rgba(140,160,255,.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(140,160,255,.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity:.20;
+      pointer-events:none;
+      mask-image: radial-gradient(closest-side at 50% 20%, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 18px 60px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 16px 18px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,14,32,.62), rgba(8,9,22,.42));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      position:sticky;
+      top:14px;
+      backdrop-filter: blur(10px);
+      z-index:10;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:14px;
+      min-width:220px;
+    }
+
+    .logo{
+      width:124px; height:110px;
+      border-radius: 14px;
+      object-fit: cover;
+      border:1px solid rgba(140,160,255,.25);
+      box-shadow: 0 0 22px rgba(45,247,255,.18);
+      flex: 0 0 auto;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1.1;
+    }
+    .brand p{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      font-family: var(--mono);
+    }
+
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .chip{
+      text-decoration:none;
+      color:var(--text);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.35);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      font-family: var(--mono);
+      letter-spacing:.03em;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(45,247,255,.42);
+      box-shadow: 0 0 0 3px rgba(45,247,255,.12);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns:1fr; }
+      header{ position:relative; top:auto; }
+    }
+
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(10,12,28,.45);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-header{
+      padding:16px 16px 12px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid rgba(140,160,255,.14);
+      background: linear-gradient(180deg, rgba(16,18,46,.55), rgba(10,12,28,.20));
+    }
+
+    .panel-header h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-family: var(--mono);
+      color:var(--text);
+    }
+
+    .badge{
+      font-family: var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+
+    .content{
+      padding:16px;
+    }
+
+    .meta{
+      display:flex; gap:8px; flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:10px;
+    }
+
+    .pill{
+      font-family: var(--mono);
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+    .pill.hot{
+      border-color: rgba(255,59,212,.35);
+      color: rgba(255,216,244,.92);
+      background: rgba(255,59,212,.10);
+    }
+    .pill.new{
+      border-color: rgba(69,255,138,.34);
+      color: rgba(194,255,218,.95);
+      background: rgba(69,255,138,.08);
+    }
+
+    h1.article-title{
+      margin:0;
+      font-size:26px;
+      letter-spacing:.01em;
+      line-height:1.25;
+    }
+
+    .byline{
+      margin:10px 0 14px;
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12.5px;
+    }
+
+    .hero{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      margin:14px 0;
+    }
+    .hero img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .article-body{
+      color:var(--text);
+      line-height:1.8;
+      font-size:15.5px;
+    }
+    .article-body p{ color: rgba(233,236,255,.93); }
+    .article-body p.lead{ font-size:16.5px; color: rgba(233,236,255,1); }
+
+    .backrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    .btn{
+      text-decoration:none;
+      color:var(--text);
+      font-family: var(--mono);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.25);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(168,107,255,.44);
+      box-shadow: 0 0 0 3px rgba(168,107,255,.12);
+    }
+
+    footer{
+      margin-top:44px;
+      padding:18px 6px 0;
+      color: rgba(167,173,214,.85);
+      font-family: var(--mono);
+      font-size:12px;
+      text-align:center;
+    }
+
+    .side{ padding:12px; }
+    .side-section{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(7,8,20,.25);
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .side-section:last-child{ margin-bottom:0; }
+
+    .side-section h4{
+      margin:0 0 10px;
+      font-family: var(--mono);
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .side-section p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:13.5px;
+    }
+
+    .tag-cloud{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .tag{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(8,10,22,.18);
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12px;
+    }
+
+    a{ color:inherit; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <a class="btn" href="index.html">
+          <img class="logo" src="Icon.png" alt="Your site logo" width="453" height="384" />
+          <div>
+            <h1>HACKED-WIRE NEWS</h1>
+            <p>Home</p>
+          </a>
+        </div>
+      </div>
+
+      <nav aria-label="Site navigation">
+        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="about.html">About</a>
+        <a class="chip" href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <main class="panel" aria-label="Article">
+        <div class="panel-header">
+          <h3>Dossier</h3>
+          <div class="badge">ARTICLE</div>
+        </div>
+
+        <div class="content">
+          <div class="backrow">
+            <a class="btn" href="index.html">
+              <span class="dot" aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px rgba(45,247,255,.25);"></span>
+              Back to feed
+            </a>
+          </div>
+
+          <div class="meta">
+            <span class="pill new">NEW</span>
+            <span class="pill hot">BREAKING</span>
+            <span class="pill">2026-08-01</span>
+            <span class="pill">CYBER</span>
+          </div>
+
+          <h1 class="article-title">Opt In, Get Watched: The Dystopian Logic of Identity Verification</h1>
+
+          <div class="byline">
+            By an anonymous • Estimated read: 7 min
+          </div>
+
+          <div class="hero">
+            <img src="article-3-image.png" alt="Hero image for the article">
+          </div>
+
+          <div class="article-body">
+            <p class="lead">
+              _In a dystopian society, the law doesn’t fail because it doesn’t exist. It fails because it’s treated like a prop—something you wave while the machinery quietly does what it was always meant to do: turn people into traceable units and make surveillance feel normal, necessary, and permanent.
+</p>
+_That’s why “consent” and “proportionality” become theatre. The system never needs to abolish rights in public. It only needs to outpace them. Deployers can point at the legal vocabulary—transparency language, privacy notices, internal “governance,” permitted purposes—while building something that behaves like a control apparatus first and a protection framework second.
+</p>
+_Start with the basic architecture of ID verification and camera surveillance. Once cameras can recognize a person, the city doesn’t just observe behavior; it attaches identity to behavior. And once identity is attached, everything becomes legible to power: movement through space, visits to locations, associations formed in public, patterns that can be reinterpreted later as “risk.” In that world, the legal promise of bounded use fights a structural reality: identity systems are inherently reusable. If a face can be matched once, it can be matched again—across departments, across vendors, across “incidents,” across time. The capability is sticky even when the paperwork claims boundaries.
+</p>
+_Consent is where the dystopia shows its teeth, because consent is not just a checkbox—it’s a condition for legitimacy. But in practice, consent is offered under the logic of exclusion: you can “choose” only if you can walk away without losing access to basic life. If the choice is “accept the camera identity system or miss the service,” what you actually get is coerced compliance disguised as autonomy. The system doesn’t need to cancel people openly; it just needs to make participation expensive. Once that’s how the world works, “consent” becomes a costume the state can wear while it normalizes coercion.
+</p>
+_Proportionality suffers the same fate. Proportionality requires restraint: camera coverage where it’s truly necessary, not where it’s simply convenient or strategically useful. But the incentives of a surveillance program don’t aim for restraint. They aim for coverage because coverage produces data, and data produces leverage. The system gets “improved,” which is another word for expanded. One camera becomes a network. One use case becomes a bundle. One pilot becomes a platform. The regime does not need a single dramatic authoritarian decision; it needs a thousand small operational justifications that—together—turn everywhere into a potential evidence room.
+</p>
+_And the real dystopian brutality is time. Rights are slow. Procurement is fast. Implementation is faster. When cameras go up, the harm is immediate: people adapt. They change routes. They avoid spaces. They decide what to say based on what might be logged and matched. Even if later legal reviews criticize a deployment, by then the social weather has already changed. The law arrives like a referee after the match is over. It can punish, but it can’t rewind the atmosphere.
+</p>
+_This is why the tool is “tech-fascist” even when it doesn’t look like fascism. Fascist control historically relied on fear, spectacle, and visible domination. Modern tech-fascism relies on something cleaner: administrative inevitability. You don’t fear a boot; you fear being unable to authenticate. You don’t expect violence; you expect denial, delay, and friction—small enough to seem like inconvenience, big enough to shape behavior. The state can keep smiling because the power is automated. The harm doesn’t require an officer in uniform. It requires a system that treats identity as access and access as compliance.
+</p>
+_And vendors help, because the business model rewards expansion. A surveillance system is most valuable when it can be reused and integrated. That means the “safe” version in the contract is rarely the “real” version in operations. The system grows through interoperability, downstream analytics, and the inevitable creep of adjacent uses. That drift is how surveillance becomes infrastructure: not by breaking the law all at once, but by changing the practice faster than oversight can meaningfully update.
+</p>
+_So the dystopia isn’t that the law is absent. It’s that the law is subordinated to deployment momentum. In that environment, every “safeguard” becomes something you satisfy for compliance rather than something you sustain for people. Notices exist, but understanding doesn’t matter. Assessments exist, but deployment drift matters less than launch deadlines. Rights exist, but remedies come after the identity linkage has already reshaped daily life.
+</p>
+_In the end, this is the hypocrisy that makes the whole machine feel like a fascist tool: it claims to manage risk while manufacturing vulnerability—turning ordinary life into a contest you can’t win because the scoreboard is owned by whoever runs the verification system. The cameras don’t just record the city. They train the city to behave. And when a society behaves because it’s surveilled, the “consent” and “proportionality” become decorations—paper shields held up against a reality engineered to persist.
+
+            </p>
+          </div>
+         <div class="content">
+          <div class="backrow">
+            <a class="btn" href="article-1.html">
+              <span class="dot" aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px rgba(45,247,255,.25);"></span>
+              Next
+            </a>
+        </div>
+      </main>
+
+      <aside class="panel side" aria-label="Sidebar">
+        <div class="side-section">
+          <h4>Sponsor</h4>
+          <p>
+            Sponsor here! Contact us!
+            <div class="tag-cloud" aria-label="Article tags">
+              <span class="tag">Hardware</span>
+              <span class="tag">Software</span>
+              <span class="tag">Product</span>
+            </div>
+          </p>
+        </div>
+
+        <div class="side-section">
+          <h4>Follow the trail</h4>
+          <p>
+            Want more like this? Jump to:
+            <br><a href="about.html">About</a>
+            <br><a href="contact.html">Contact</a>
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year">2026</span> Hacked-wire-news •
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

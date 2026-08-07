@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HACK-WIRE News</title>
+
+  <style>
+    :root{
+      --bg0:#060711;
+      --bg1:#090a16;
+      --text:#e9ecff;
+      --muted:#a7add6;
+      --line: rgba(140, 160, 255, .18);
+      --radius: 16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color:var(--text);
+      background: linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 22px 18px 60px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 16px 16px;
+      border:1px solid var(--line);
+      background: rgba(10,12,28,.35);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 14px;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .brand{ display:flex; align-items:center; gap:14px; min-width:220px; }
+    .logo{
+      width:84px; height:76px;
+      border-radius: 14px;
+      object-fit: cover;
+      border:1px solid rgba(140,160,255,.25);
+    }
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1.1;
+    }
+    .brand p{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      font-family: var(--mono);
+    }
+
+    nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .chip{
+      text-decoration:none;
+      color:var(--text);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.35);
+      font-family: var(--mono);
+      letter-spacing:.03em;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 920px){
+      .grid{ grid-template-columns: 1.2fr .8fr; }
+    }
+
+    .panel{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(10,12,28,.35);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-header{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(140,160,255,.14);
+      background: rgba(16,18,46,.35);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .panel-header h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-family: var(--mono);
+    }
+
+    .badge{
+      font-family: var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+
+    .list{ padding:14px; display:flex; flex-direction:column; gap:12px; }
+
+    .card{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(7,8,20,.20);
+      padding:14px;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(45,247,255,.34);
+    }
+
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:8px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size:12px;
+    }
+
+    .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+
+    .pill.hot{ border-color: rgba(255,59,212,.35); color: rgba(255,216,244,.92); background: rgba(255,59,212,.10); }
+    .pill.new{ border-color: rgba(69,255,138,.34); color: rgba(194,255,218,.95); background: rgba(69,255,138,.08); }
+
+    h4{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.02em;
+      line-height:1.35;
+    }
+
+    .excerpt{
+      margin:8px 0 12px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:13.5px;
+    }
+
+    .links{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+    .btn{
+      text-decoration:none;
+      color:var(--text);
+      font-family: var(--mono);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.25);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .btn:focus-visible{
+      outline: 2px solid rgba(45,247,255,.6);
+      outline-offset: 2px;
+    }
+
+    .side{ padding:14px; }
+    .side-section{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(7,8,20,.25);
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .side-section:last-child{ margin-bottom:0; }
+
+    .side-section h4{
+      margin:0 0 10px;
+      font-family: var(--mono);
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .side-section p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:13.5px;
+    }
+
+    .tag-cloud{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .tag{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(8,10,22,.18);
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12px;
+    }
+
+    footer{
+      margin-top:44px;
+      padding:18px 6px 0;
+      color: rgba(167,173,214,.85);
+      font-family: var(--mono);
+      font-size:12px;
+      text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img class="logo" src="Icon.png" alt="Your site logo" width="453" height="384" />
+        <div>
+          <h1>HACK-WIRE NEWS</h1>
+          <p>World, Cyber and Anarchy</p>
+        </div>
+      </div>
+
+      <nav aria-label="Site navigation">
+        <a class="chip" href="about.html">About</a>
+        <a class="chip" href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <main class="panel" aria-label="Article list">
+        <div class="panel-header">
+          <h3>Archive Console</h3>
+          <div class="badge">Replace content • Keep layout</div>
+        </div>
+
+        <div class="list">
+          <article class="card">
+            <div class="meta">
+              <span class="pill new">NEW</span>
+              <span class="pill">2026-08-01</span>
+              <span class="pill hot">BREAKING</span>
+            </div>
+            <h4>YOUR TITLE GOES HERE</h4>
+            <p class="excerpt">
+              Short excerpt for the neon dossier. Summarize the story in 2–3 sentences so readers know what they’re about to open.
+            </p>
+            <div class="links">
+              <a class="btn" href="article-1.html">Read →</a>
+              <!-- optional extra links
+              <a class="btn" href="YOUR_VIDEO_URL_HERE" target="_blank" rel="noopener">Video</a>
+              <a class="btn" href="YOUR_IMAGE_FULL_URL_HERE.jpg" target="_blank" rel="noopener">Image</a>
+              -->
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="pill">2026-07-29</span>
+              <span class="pill">TECH</span>
+            </div>
+            <h4>ANOTHER HEADLINE FOR YOUR CYBERPUNK FEED</h4>
+            <p class="excerpt">
+              Paste a quick summary here. Keep it punchy—think “headline + payoff.”
+            </p>
+            <div class="links">
+              <a class="btn" href="article-2.html">Read →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="pill">2026-07-25</span>
+              <span class="pill">CITY</span>
+            </div>
+            <h4>THIRD HEADLINE: STATIC RAIN ON NEON CONCRETE</h4>
+            <p class="excerpt">
+              A few lines of excerpt—what happened, why it matters, and what readers should look for when they open the full story page.
+            </p>
+            <div class="links">
+              <a class="btn" href="article-3.html">Read →</a>
+            </div>
+          </article>
+        </div>
+      </main>
+
+      <aside class="panel side" aria-label="Sidebar">
+        <div class="side-section" id="about">
+          <h4>About</h4>
+          <p>Weekly Independent News</p>
+          <div class="tag-cloud" aria-label="Category tags">
+            <span class="tag">Markets</span>
+            <span class="tag">Signal</span>
+            <span class="tag">Tech</span>
+            <span class="tag">City</span>
+            <span class="tag">Intel</span>
+          </div>
+        </div>
+
+        <div class="side-section" id="contact">
+          <h4>Quick Notes</h4>
+          <p>
+            Find us here:<br>
+            Odysee<br>
+            Parteon<br>
+            ...
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year">2026</span> NEONWIRE • Template UI
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

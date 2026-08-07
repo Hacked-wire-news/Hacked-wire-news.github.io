@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HACKED-WIRE News • Article 1</title>
+
+  <style>
+    :root{
+      --bg0:#060711;
+      --bg1:#090a16;
+      --text:#e9ecff;
+      --muted:#a7add6;
+      --line: rgba(140, 160, 255, .18);
+      --cyan:#2df7ff;
+      --violet:#a86bff;
+      --pink:#ff3bd4;
+      --radius: 16px;
+      --radius2: 22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --cardGradA: radial-gradient(300px 120px at 15% 0%, rgba(45,247,255,.10), transparent 55%);
+      --cardGradB: radial-gradient(260px 120px at 95% 0%, rgba(168,107,255,.12), transparent 55%);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 12% 12%, rgba(168,107,255,.20), transparent 55%),
+        radial-gradient(800px 450px at 82% 18%, rgba(45,247,255,.18), transparent 55%),
+        radial-gradient(700px 420px at 60% 92%, rgba(255,59,212,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(to right, rgba(140,160,255,.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(140,160,255,.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity:.20;
+      pointer-events:none;
+      mask-image: radial-gradient(closest-side at 50% 20%, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 18px 60px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 16px 18px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,14,32,.62), rgba(8,9,22,.42));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      position:sticky;
+      top:14px;
+      backdrop-filter: blur(10px);
+      z-index:10;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:14px;
+      min-width:220px;
+    }
+
+    .logo{
+      width:124px; height:110px;
+      border-radius: 14px;
+      object-fit: cover;
+      border:1px solid rgba(140,160,255,.25);
+      box-shadow: 0 0 22px rgba(45,247,255,.18);
+      flex: 0 0 auto;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1.1;
+    }
+    .brand p{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      font-family: var(--mono);
+    }
+
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .chip{
+      text-decoration:none;
+      color:var(--text);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.35);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      font-family: var(--mono);
+      letter-spacing:.03em;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(45,247,255,.42);
+      box-shadow: 0 0 0 3px rgba(45,247,255,.12);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns:1fr; }
+      header{ position:relative; top:auto; }
+    }
+
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(10,12,28,.45);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-header{
+      padding:16px 16px 12px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid rgba(140,160,255,.14);
+      background: linear-gradient(180deg, rgba(16,18,46,.55), rgba(10,12,28,.20));
+    }
+
+    .panel-header h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-family: var(--mono);
+      color:var(--text);
+    }
+
+    .badge{
+      font-family: var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+
+    .content{
+      padding:16px;
+    }
+
+    .meta{
+      display:flex; gap:8px; flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:10px;
+    }
+
+    .pill{
+      font-family: var(--mono);
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+    .pill.hot{
+      border-color: rgba(255,59,212,.35);
+      color: rgba(255,216,244,.92);
+      background: rgba(255,59,212,.10);
+    }
+    .pill.new{
+      border-color: rgba(69,255,138,.34);
+      color: rgba(194,255,218,.95);
+      background: rgba(69,255,138,.08);
+    }
+
+    h1.article-title{
+      margin:0;
+      font-size:26px;
+      letter-spacing:.01em;
+      line-height:1.25;
+    }
+
+    .byline{
+      margin:10px 0 14px;
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12.5px;
+    }
+
+    .hero{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      margin:14px 0;
+    }
+    .hero img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .article-body{
+      color:var(--text);
+      line-height:1.8;
+      font-size:15.5px;
+    }
+    .article-body p{ color: rgba(233,236,255,.93); }
+    .article-body p.lead{ font-size:16.5px; color: rgba(233,236,255,1); }
+
+    .backrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    .btn{
+      text-decoration:none;
+      color:var(--text);
+      font-family: var(--mono);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.25);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(168,107,255,.44);
+      box-shadow: 0 0 0 3px rgba(168,107,255,.12);
+    }
+
+    footer{
+      margin-top:44px;
+      padding:18px 6px 0;
+      color: rgba(167,173,214,.85);
+      font-family: var(--mono);
+      font-size:12px;
+      text-align:center;
+    }
+
+    .side{ padding:12px; }
+    .side-section{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(7,8,20,.25);
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .side-section:last-child{ margin-bottom:0; }
+
+    .side-section h4{
+      margin:0 0 10px;
+      font-family: var(--mono);
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .side-section p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:13.5px;
+    }
+
+    .tag-cloud{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .tag{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(8,10,22,.18);
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12px;
+    }
+
+    a{ color:inherit; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <a class="btn" href="index.html">
+          <img class="logo" src="Icon.png" alt="Your site logo" width="453" height="384" />
+          <div>
+            <h1>HACKED-WIRE NEWS</h1>
+            <p>Home</p>
+          </a>
+        </div>
+      </div>
+
+      <nav aria-label="Site navigation">
+        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="about.html">About</a>
+        <a class="chip" href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <main class="panel" aria-label="Article">
+        <div class="panel-header">
+          <h3>Dossier</h3>
+          <div class="badge">ARTICLE</div>
+        </div>
+
+        <div class="content">
+          <div class="backrow">
+            <a class="btn" href="index.html">
+              <span class="dot" aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px rgba(45,247,255,.25);"></span>
+              Back to feed
+            </a>
+          </div>
+
+          <div class="meta">
+            <span class="pill new">NEW</span>
+            <span class="pill hot">BREAKING</span>
+            <span class="pill">2026-08-01</span>
+            <span class="pill">Idiocracy</span>
+          </div>
+
+          <h1 class="article-title">The clown falls so his puppet master can stay</h1>
+
+          <div class="byline">
+            By an anonymous • Estimated read: 5 min
+          </div>
+
+          <div class="hero">
+            <img src="article-1-image.jpg" alt="Hero image for the article">
+          </div>
+
+          <div class="article-body">
+            <p class="lead">
+              -The international humiliation rolls in loud enough to shake headlines, dramatic enough to interrupt dinner, catastrophic enough to demand an answer. And then, the institution needs, as if on a cue that’s been rehearsed since the first committee hearing of the species, to play the blame machine card!
+            </p>
+              -So is the clown president going to "fall"? his corrupt family gets condemned, but be shure a new villain gets installed like a replacement steering wheel.
+
+              -Americans get what they’re offered: moral clarity with a branding package. Anger that fits into a soundbite. Condemnation that feels like action—because in politics, action sometimes means pointing at the incompetent stupid narcisist clown and calling it accountability.
+
+              But accountability that stops at a person is just a softer version of delay.
+            </p>
+
+            <p>
+              -Here’s the part satire keeps trying to say politely, and politics keeps refusing to hear: many states don’t “do” conflict the way movies do. They manage it. They try to achieve objectives while limiting political cost, risk, and escalation consequences. A recurring idea in conflict and strategy analysis is that direct confrontation can be hard to sustain—so states often rely on indirect methods, delegation, proxies, and other approaches that keep the sponsor at a safer distance.
+            </p>
+
+              -Once you accept that, the blame-shift becomes less like an accident and more like a feature of the system. If your doctrine is comfortable with indirect escalation, then “humiliation” is not something that simply happens; it’s something that the public is taught to metabolize as a solution, then to blame on closest puppet to the microphone when the tab comes due.
+            </p>
+              -So the satire target isn’t “Israel bad / Iran bad / Trump bad / everyone bad.” That’s lazy, because it lets the institution behind the paperwork stay invisible.
+
+              -The satire target is the ritual: when consequences become undeniable, the public is pushed toward personal punishment instead of structural questions. It’s the easiest way to avoid the   only investigation that actually matters: “who and when was made the decision,” and “why did the decision-making prefer the method that predictably produces stupidity, misery and catastrophe?”
+            </p>
+              -Using logical reactions like anyone is entitled to defend itself by all means, the point isn’t to lecture one country or the other neither to moralize their existence in a region. The point is narrower, and therefore sharper: regional actors are often treated as convenient explanatory seasoning in a narrative where the real story is about sponsor incentives and how conflicts are sustained through indirect means.
+            </p>
+
+            <p>
+              -In other words, even when you acknowledge Iranian or even Palestinians reactions, it doesn’t complete the explanation. It supplies a pretext. That doesn’t replace the mechanism.
+            </P>
+              -The clown falls so his puppet master can stay. The institutions don't needs immortality. They needs continuity. A replacement face buys continuity. A condemnation season buys time. A scapegoat buys the same apparatus another turn of the wheel.
+            </p>
+
+              -Because “responsibility” in this context isn’t just moral blame for idiots, it’s ownership of the method: the preference for indirect approaches, the comfort with plausible distance, the institutional habits that turn escalation into something that can be managed through networks while insisting it’s not “direct warfare.” When the dominoes fall, the blame story changes first; "the stupid corrupt clown must endorse all the anger" so the operating model stays in place.
+
+            </p>
+
+            <p>
+              -So the world get played again, not because it lacks facts, but because it is offered a shortcut and accept it with no protest what so ever for the atrocities made in their name: personal condemnation instead of systems scrutiny.
+            </P>
+              -The punishment arrives neatly. The questions arrive late in a stupid society if they arrive at all.
+
+              -And the most American part of the whole thing is, that the audience mistakes the end of the segment for the end of the investigation! because it’s easier to watch a president topple than to watch an institution keep walking.
+            </p>
+          </div>
+         <div class="content">
+          <div class="backrow">
+            <a class="btn" href="article-2.html">
+              <span class="dot" aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px rgba(45,247,255,.25);"></span>
+              Next
+            </a>
+        </div>
+      </main>
+
+      <aside class="panel side" aria-label="Sidebar">
+        <div class="side-section">
+          <h4>Sponsor here!</h4>
+          <p>
+            Contact us!
+            <div class="tag-cloud" aria-label="Article tags">
+              <span class="tag">Hardware</span>
+              <span class="tag">Software</span>
+              <span class="tag">Products</span>
+            </div>
+          </p>
+        </div>
+
+        <div class="side-section">
+          <h4>Follow the trail</h4>
+          <p>
+            Want more like this? Jump to:
+            <br><a href="about.html">About</a>
+            <br><a href="contact.html">Contact</a>
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year">2026</span> Hacked-wire-news •
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

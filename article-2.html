@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HACKED-WIRE News • Article 2</title>
+
+  <style>
+    :root{
+      --bg0:#060711;
+      --bg1:#090a16;
+      --text:#e9ecff;
+      --muted:#a7add6;
+      --line: rgba(140, 160, 255, .18);
+      --cyan:#2df7ff;
+      --violet:#a86bff;
+      --pink:#ff3bd4;
+      --radius: 16px;
+      --radius2: 22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --cardGradA: radial-gradient(300px 120px at 15% 0%, rgba(45,247,255,.10), transparent 55%);
+      --cardGradB: radial-gradient(260px 120px at 95% 0%, rgba(168,107,255,.12), transparent 55%);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 12% 12%, rgba(168,107,255,.20), transparent 55%),
+        radial-gradient(800px 450px at 82% 18%, rgba(45,247,255,.18), transparent 55%),
+        radial-gradient(700px 420px at 60% 92%, rgba(255,59,212,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(to right, rgba(140,160,255,.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(140,160,255,.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity:.20;
+      pointer-events:none;
+      mask-image: radial-gradient(closest-side at 50% 20%, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 18px 60px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 16px 18px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,14,32,.62), rgba(8,9,22,.42));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      position:sticky;
+      top:14px;
+      backdrop-filter: blur(10px);
+      z-index:10;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:14px;
+      min-width:220px;
+    }
+
+    .logo{
+      width:124px; height:110px;
+      border-radius: 14px;
+      object-fit: cover;
+      border:1px solid rgba(140,160,255,.25);
+      box-shadow: 0 0 22px rgba(45,247,255,.18);
+      flex: 0 0 auto;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1.1;
+    }
+    .brand p{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      font-family: var(--mono);
+    }
+
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .chip{
+      text-decoration:none;
+      color:var(--text);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.35);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      font-family: var(--mono);
+      letter-spacing:.03em;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(45,247,255,.42);
+      box-shadow: 0 0 0 3px rgba(45,247,255,.12);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns:1fr; }
+      header{ position:relative; top:auto; }
+    }
+
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(10,12,28,.45);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-header{
+      padding:16px 16px 12px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid rgba(140,160,255,.14);
+      background: linear-gradient(180deg, rgba(16,18,46,.55), rgba(10,12,28,.20));
+    }
+
+    .panel-header h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-family: var(--mono);
+      color:var(--text);
+    }
+
+    .badge{
+      font-family: var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+
+    .content{
+      padding:16px;
+    }
+
+    .meta{
+      display:flex; gap:8px; flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:10px;
+    }
+
+    .pill{
+      font-family: var(--mono);
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+    .pill.hot{
+      border-color: rgba(255,59,212,.35);
+      color: rgba(255,216,244,.92);
+      background: rgba(255,59,212,.10);
+    }
+    .pill.new{
+      border-color: rgba(69,255,138,.34);
+      color: rgba(194,255,218,.95);
+      background: rgba(69,255,138,.08);
+    }
+
+    h1.article-title{
+      margin:0;
+      font-size:26px;
+      letter-spacing:.01em;
+      line-height:1.25;
+    }
+
+    .byline{
+      margin:10px 0 14px;
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12.5px;
+    }
+
+    .hero{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      margin:14px 0;
+    }
+    .hero img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .article-body{
+      color:var(--text);
+      line-height:1.8;
+      font-size:15.5px;
+    }
+    .article-body p{ color: rgba(233,236,255,.93); }
+    .article-body p.lead{ font-size:16.5px; color: rgba(233,236,255,1); }
+
+    .backrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    .btn{
+      text-decoration:none;
+      color:var(--text);
+      font-family: var(--mono);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.25);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(168,107,255,.44);
+      box-shadow: 0 0 0 3px rgba(168,107,255,.12);
+    }
+
+    footer{
+      margin-top:44px;
+      padding:18px 6px 0;
+      color: rgba(167,173,214,.85);
+      font-family: var(--mono);
+      font-size:12px;
+      text-align:center;
+    }
+
+    .side{ padding:12px; }
+    .side-section{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(7,8,20,.25);
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .side-section:last-child{ margin-bottom:0; }
+
+    .side-section h4{
+      margin:0 0 10px;
+      font-family: var(--mono);
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .side-section p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:13.5px;
+    }
+
+    .tag-cloud{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .tag{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(8,10,22,.18);
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12px;
+    }
+
+    a{ color:inherit; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <a class="btn" href="index.html">
+          <img class="logo" src="Icon.png" alt="Your site logo" width="453" height="384" />
+          <div>
+            <h1>HACKED-WIRE NEWS</h1>
+            <p>Home</p>
+          </a>
+        </div>
+      </div>
+
+      <nav aria-label="Site navigation">
+        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="about.html">About</a>
+        <a class="chip" href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <main class="panel" aria-label="Article">
+        <div class="panel-header">
+          <h3>Dossier</h3>
+          <div class="badge">ARTICLE</div>
+        </div>
+
+        <div class="content">
+          <div class="backrow">
+            <a class="btn" href="index.html">
+              <span class="dot" aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px rgba(45,247,255,.25);"></span>
+              Back to feed
+            </a>
+          </div>
+
+          <div class="meta">
+            <span class="pill new">NEW</span>
+            <span class="pill hot">BREAKING</span>
+            <span class="pill">2026-08-01</span>
+            <span class="pill">CYBER</span>
+          </div>
+
+          <h1 class="article-title">The Rise of Tor-Only Social Media: Freedom of Speech… or Where Extremists Do Group Therapy?</h1>
+
+          <div class="byline">
+            By an anonymous • Estimated read: 5 min
+          </div>
+
+          <div class="hero">
+            <img src="article-2-image.png" alt="Hero image for the article">
+          </div>
+
+          <div class="article-body">
+            <p class="lead">
+              _In a world where every scroll is allegedly “personalized,” anonymity isn’t a luxury anymore! it’s the last vestige of privacy that hasn’t been monetized, screenshot, and resold to the highest bidder. So naturally, people with something to say (or something to hide) drift toward Tor-only social media: platforms that promise invisibility.
+            </p>
+              _Except “no rules” is a pretty way to say “no adult in the room.” And in the neon chaos of Tor-only networks, the consequences don’t exactly file a complaint.
+            </p>
+              _No doubt, Tor-only social media can be a lifeline. In oppressive regions, it can help dissidents, journalists, and activists bypass censorship and share information that would otherwise get buried, throttled, or punished into silence. So it’s becoming the only place where truth can survive the algorithmic purge.
+
+            </p>
+              _But here’s the fun part: the same invisibility that protects journalists also protects people who would absolutely love to use invisibility for something uglier. When moderation is thin, moderation becomes optional, and “controversial” quickly stops meaning “heated” and starts meaning “dangerous.” We can easily understand the hipocrisy at plays here when the media narrative is about protection when the consequencies tells otherwise.
+            </p>
+              _One side calls it free speech. The other side calls it a corner of the internet without supervision. Everyone’s technically correct in the same way a loaded dice is “fair.”
+            </p>
+              <h2>_How it’s changing the internet’s DNA (whether society asked for the sequel or not):</h2>
+            </p>
+              _Tor-only social media is reshaping communication by proving a point: people will build parallel digital worlds when the mainstream world feels too watched, too controlled, or too hostile.
+            </p>
+              _It redefines privacy as something you don’t have to trade away for safety.
+              It creates parallel societies where the normal rules stop applying.
+              It inspires imitators, because mainstream platforms love “privacy-focused models” right up until it costs them ad targeting.
+            </p>
+              _But the same shift also increases risk. When moderation disappears into the fog, extremist content and illegal activity don’t politely take a number! they move in, set up shop, and start recruiting in the dark!
+            </p>
+              _The crossroads future: will it become a tool—or an echo chamber?:
+            </p>
+              _The future is a coin flip dressed as a philosophy lecture. Tor-only networks could evolve into essential spaces for advocacy and protected reporting… or they could become isolated chambers where people avoid oversight, curate confirmation, and harden their worldview into something harder to unsee.
+
+              And “middle ground” is the dream, the slogan, the impossible compromise: enough structure to reduce harm, without building a surveillance machine that kills the point of anonymity.
+            </p>
+              _Tor-only social media is a testament to the modern battle between freedom and control! Except the border is blurry, the stakes are high, and the user experience is basically “choose your consequences.”
+
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <aside class="panel side" aria-label="Sponsor">
+        <div class="side-section">
+          <h4>Sponsor here!</h4>
+          <p>
+            Contact us!
+            <div class="tag-cloud" aria-label="Article tags">
+              <span class="tag">Hardware</span>
+              <span class="tag">software</span>
+              <span class="tag">Products</span>
+            </div>
+          </p>
+        </div>
+
+        <div class="side-section">
+          <h4>Follow the trail</h4>
+          <p>
+            Want more like this? Jump to:
+            <br><a href="about.html">About</a>
+            <br><a href="contact.html">Contact</a>
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year">2026</span> Hacked-wire-news •
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
