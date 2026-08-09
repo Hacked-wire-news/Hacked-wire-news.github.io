@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HACKED-WIRE News • Article 2</title>
+
+  <style>
+    :root{
+      --bg0:#060711;
+      --bg1:#090a16;
+      --text:#e9ecff;
+      --muted:#a7add6;
+      --line: rgba(140, 160, 255, .18);
+      --cyan:#2df7ff;
+      --violet:#a86bff;
+      --pink:#ff3bd4;
+      --radius: 16px;
+      --radius2: 22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --cardGradA: radial-gradient(300px 120px at 15% 0%, rgba(45,247,255,.10), transparent 55%);
+      --cardGradB: radial-gradient(260px 120px at 95% 0%, rgba(168,107,255,.12), transparent 55%);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 12% 12%, rgba(168,107,255,.20), transparent 55%),
+        radial-gradient(800px 450px at 82% 18%, rgba(45,247,255,.18), transparent 55%),
+        radial-gradient(700px 420px at 60% 92%, rgba(255,59,212,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(to right, rgba(140,160,255,.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(140,160,255,.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity:.20;
+      pointer-events:none;
+      mask-image: radial-gradient(closest-side at 50% 20%, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 18px 60px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 16px 18px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,14,32,.62), rgba(8,9,22,.42));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      position:sticky;
+      top:14px;
+      backdrop-filter: blur(10px);
+      z-index:10;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:14px;
+      min-width:220px;
+    }
+
+    .logo{
+      width:124px; height:110px;
+      border-radius: 14px;
+      object-fit: cover;
+      border:1px solid rgba(140,160,255,.25);
+      box-shadow: 0 0 22px rgba(45,247,255,.18);
+      flex: 0 0 auto;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1.1;
+    }
+    .brand p{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      font-family: var(--mono);
+    }
+
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .chip{
+      text-decoration:none;
+      color:var(--text);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.35);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      font-family: var(--mono);
+      letter-spacing:.03em;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(45,247,255,.42);
+      box-shadow: 0 0 0 3px rgba(45,247,255,.12);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns:1fr; }
+      header{ position:relative; top:auto; }
+    }
+
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(10,12,28,.45);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-header{
+      padding:16px 16px 12px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid rgba(140,160,255,.14);
+      background: linear-gradient(180deg, rgba(16,18,46,.55), rgba(10,12,28,.20));
+    }
+
+    .panel-header h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-family: var(--mono);
+      color:var(--text);
+    }
+
+    .badge{
+      font-family: var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+
+    .content{
+      padding:16px;
+    }
+
+    .meta{
+      display:flex; gap:8px; flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:10px;
+    }
+
+    .pill{
+      font-family: var(--mono);
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(140,160,255,.18);
+      color:var(--muted);
+      background: rgba(8,10,22,.25);
+      white-space:nowrap;
+    }
+    .pill.hot{
+      border-color: rgba(255,59,212,.35);
+      color: rgba(255,216,244,.92);
+      background: rgba(255,59,212,.10);
+    }
+    .pill.new{
+      border-color: rgba(69,255,138,.34);
+      color: rgba(194,255,218,.95);
+      background: rgba(69,255,138,.08);
+    }
+
+    h1.article-title{
+      margin:0;
+      font-size:26px;
+      letter-spacing:.01em;
+      line-height:1.25;
+    }
+
+    .byline{
+      margin:10px 0 14px;
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12.5px;
+    }
+
+    .hero{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      margin:14px 0;
+    }
+    .hero img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .article-body{
+      color:var(--text);
+      line-height:1.8;
+      font-size:15.5px;
+    }
+    .article-body p{ color: rgba(233,236,255,.93); }
+    .article-body p.lead{ font-size:16.5px; color: rgba(233,236,255,1); }
+
+    .backrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    .btn{
+      text-decoration:none;
+      color:var(--text);
+      font-family: var(--mono);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(140,160,255,.18);
+      background: rgba(8,10,22,.25);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(168,107,255,.44);
+      box-shadow: 0 0 0 3px rgba(168,107,255,.12);
+    }
+
+    footer{
+      margin-top:44px;
+      padding:18px 6px 0;
+      color: rgba(167,173,214,.85);
+      font-family: var(--mono);
+      font-size:12px;
+      text-align:center;
+    }
+
+    .side{ padding:12px; }
+    .side-section{
+      border-radius: var(--radius);
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(7,8,20,.25);
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .side-section:last-child{ margin-bottom:0; }
+
+    .side-section h4{
+      margin:0 0 10px;
+      font-family: var(--mono);
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .side-section p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:13.5px;
+    }
+
+    .tag-cloud{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .tag{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(140,160,255,.16);
+      background: rgba(8,10,22,.18);
+      color:var(--muted);
+      font-family: var(--mono);
+      font-size:12px;
+    }
+
+    a{ color:inherit; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <a class="btn" href="index.html">
+          <img class="logo" src="Icon.png" alt="" width="453" height="384" />
+          <div>
+            <h1>HACKED-WIRE NEWS</h1>
+            <p>Home</p>
+          </a>
+        </div>
+      </div>
+
+      <nav aria-label="Site navigation">
+        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="about.html">About</a>
+        <a class="chip" href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <main class="panel" aria-label="Article">
+        <div class="panel-header">
+          <h3>Dossier</h3>
+          <div class="badge">ARTICLE</div>
+        </div>
+
+        <div class="content">
+          <div class="backrow">
+            <a class="btn" href="index.html">
+              <span class="dot" aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px rgba(45,247,255,.25);"></span>
+              Back to feed
+            </a>
+          </div>
+
+          <div class="meta">
+            <span class="pill new">NEW</span>
+            <span class="pill hot">BREAKING</span>
+            <span class="pill">2026-08-08</span>
+            <span class="pill">CYBER</span>
+          </div>
+
+          <h1 class="article-title">Palantir's paperwork super-powers!'</h1>
+
+          <div class="byline">
+            By an anonymous • Estimated read: 3 min
+          </div>
+
+          <div class="hero">
+            <img src="article-4-image.jpg" alt="hacke-wire-news">
+          </div>
+
+          <div class="article-body">
+            <p class="lead">
+              _The confettis are real in this dictatorship company!
+
+Palantir’s latest quarter arrives with all the usual perks: fast!! Growing numbers, margins that make other software companies look like they’re running on vibes and debt, and a stock reaction to drown out your ability to ask uncomfortable questions. The market hears “execution” and immediately starts composing redemption arcs.
+<p>
+_But we don’t get to stop at the confetti!!. We track where the levers are, who keeps them in place, and what happens to everyone else when insiders treat their equity like a liquidity plan instead of a life mission.
+<h1>Governance as permanent plot armor</h1>
+<p>
+_A dictatorship company is about control! It doesn’t behave like standard public-company ownership. In many dual-class setups, founders receive extra voting power early on, but that voting power tends to weaken as they sell enough shares! Think of it, dilution becomes a governance pressure valve. Palantir’s structure uses a third share class, held exclusively by the founders!! Whose voting influence is designed to remain anchored to the founders collectively. In other words, the normal relationship between “economic ownership” and “governance power” is disrupted. Ordinary shareholder checks don’t work the same way when control can be mathematically maintained even as insiders reduce their stake. That’s not democracy-with-earnings; it’s governance insulated from the usual market consequences.
+<p>
+<h1>Insider selling: the confidence test</h1>
+<p>
+_Then there’s the behavior: insiders selling at scale while the open market sees no meaningful counter-purchases. We are not  calling it illegal no, just readable. When the people closest to the company keep choosing liquidity and don’t appear to be buying into the same “everything is undervalued” narrative the market is hearing, the emotional story flips!! Instead of “long-term conviction,” you get “scalable exit”! And because governance is protected, that exit can happen without threatening the insiders’ steering position. It feels almost like a scam! It’s the kind of incentive mismatch that makes headlines look like a rerun of every other corporate optimism campaign: perform well now, manage ownership outcomes later.
+<p>
+<h1>Dilution</h1>
+
+_Finally, there’s dilution!! The slow-motion theft people don’t dramatize because it doesn’t flash on a trading screen. When stock-based compensation expands faster than buybacks can offset it, shareholder percentage ownership erodes even as the company grows! The uncomfortable twist is that governance can remain stable while economic exposure shifts. So the founders don’t “feel” the same squeeze as outside holders, because the rules protect the steering wheel even if the steering passengers gradually lose their seats.
+<p>
+<h1>To conclued</h1>
+
+_Palantir can be executing. It can be building real value. And still the headline can be misleading, because market performance isn’t the same thing as shareholder alignment. A great quarter can be just the prologue to a corporate structure that treats outside investors like long-term spectators! In a show whose director can keep swapping out the cast while the control room never changes hands. But it seems like for the shareholders the shows is about not being in the wrong side of history now, and not about two stupid puppet clowns anymore! So it does look like a long-term surviving plan for a doomed company because no one asked for it (beside tech-fascists) in the first place.
+
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <aside class="panel side" aria-label="Sponsor">
+        <div class="side-section">
+          <h4>Sponsor here!</h4>
+          <p>
+            Contact us!
+            <div class="tag-cloud" aria-label="Article tags">
+              <span class="tag">Hardware</span>
+              <span class="tag">software</span>
+              <span class="tag">Products</span>
+            </div>
+          </p>
+        </div>
+
+        <div class="side-section">
+          <h4>Follow the trail</h4>
+          <p>
+            Want more like this? Jump to:
+            <br><a href="about.html">About</a>
+            <br><a href="contact.html">Contact</a>
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year">2026</span> Hacked-wire-news •
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
